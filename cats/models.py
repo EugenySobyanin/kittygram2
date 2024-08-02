@@ -29,6 +29,15 @@ class Cat(models.Model):
 
     def __str__(self):
         return self.name
+    
+    # Не дает записывать в базу объект с одинаковым сочитаением значений полей
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['name', 'owner'],
+                name='unique_name_owner'
+            )
+        ]
 
 
 class AchievementCat(models.Model):
